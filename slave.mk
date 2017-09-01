@@ -379,7 +379,19 @@ $(DOCKER_LOAD_TARGETS) : $(TARGET_PATH)/%.gz-load : .platform docker-start $$(TA
 ###############################################################################
 
 # targets for building installers with base image
-$(addprefix $(TARGET_PATH)/, $(SONIC_INSTALLERS)) : $(TARGET_PATH)/% : .platform onie-image.conf $$(addprefix $(DEBS_PATH)/,$$($$*_DEPENDS)) $$(addprefix $(DEBS_PATH)/,$$($$*_INSTALLS)) $$(addprefix $(FILES_PATH)/,$$($$*_FILES)) $(addprefix $(DEBS_PATH)/,$(INITRAMFS_TOOLS) $(LINUX_KERNEL) $(IGB_DRIVER) $(SONIC_DEVICE_DATA) $(SONIC_UTILS)) $$(addprefix $(TARGET_PATH)/,$$($$*_DOCKERS)) $$(addprefix $(PYTHON_WHEELS_PATH)/,$(SONIC_CONFIG_ENGINE))
+$(addprefix $(TARGET_PATH)/, $(SONIC_INSTALLERS)) : $(TARGET_PATH)/% : .platform \
+        onie-image.conf \
+        build_debian.sh \
+        build_image.sh \
+        $$(addprefix $(DEBS_PATH)/,$$($$*_DEPENDS)) \
+        $$(addprefix $(DEBS_PATH)/,$$($$*_INSTALLS)) \
+        $$(addprefix $(FILES_PATH)/,$$($$*_FILES)) \
+        $(addprefix $(DEBS_PATH)/,$(INITRAMFS_TOOLS)) \
+        $(addprefix $(DEBS_PATH)/,$(SONIC_DEVICE_DATA)) \
+        $(addprefix $(DEBS_PATH)/,$(SONIC_UTILS)) \
+        $(addprefix $(DEBS_PATH)/,$(IGB_DRIVER)) \
+        $$(addprefix $(TARGET_PATH)/,$$($$*_DOCKERS)) \
+        $$(addprefix $(PYTHON_WHEELS_PATH)/,$(SONIC_CONFIG_ENGINE))
 	$(HEADER)
 	# Pass initramfs and linux kernel explicitly. They are used for all platforms
 	export initramfs_tools="$(DEBS_PATH)/$(INITRAMFS_TOOLS)"
