@@ -389,7 +389,6 @@ $(addprefix $(TARGET_PATH)/, $(SONIC_INSTALLERS)) : $(TARGET_PATH)/% : .platform
         $(addprefix $(DEBS_PATH)/,$(INITRAMFS_TOOLS)) \
         $(addprefix $(DEBS_PATH)/,$(SONIC_DEVICE_DATA)) \
         $(addprefix $(DEBS_PATH)/,$(SONIC_UTILS)) \
-        $(addprefix $(DEBS_PATH)/,$(IGB_DRIVER)) \
         $$(addprefix $(TARGET_PATH)/,$$($$*_DOCKERS)) \
         $$(addprefix $(PYTHON_WHEELS_PATH)/,$(SONIC_CONFIG_ENGINE))
 	$(HEADER)
