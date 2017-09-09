@@ -200,7 +200,9 @@ RUN apt-get update && apt-get install -y \
         procmail \
 # For gtest
         libgtest-dev \
-        cmake
+        cmake \
+# For initramfs
+        bash-completion
 
 # For linux build
 RUN apt-get -y build-dep linux
