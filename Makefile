@@ -17,6 +17,7 @@ SLAVE_TAG = $(shell cat sonic-slave/Dockerfile.user sonic-slave/Dockerfile | sha
 SLAVE_BASE_IMAGE = sonic-slave-base
 SLAVE_IMAGE = sonic-slave-$(USER)
 
+INSMOD_OVERLAY := sudo modprobe overlay
 DOCKER_RUN := docker run --rm=true --privileged \
     -v $(PWD):/sonic \
     -w /sonic \
@@ -48,6 +49,7 @@ DOCKER_BUILD = docker build --no-cache \
 	@docker inspect --type image $(SLAVE_IMAGE):$(SLAVE_TAG) &> /dev/null || \
 	    { echo Image $(SLAVE_IMAGE):$(SLAVE_TAG) not found. Building... ; \
 	    $(DOCKER_BUILD) ; }
+	@$(INSMOD_OVERLAY)
 	@$(DOCKER_RUN) $(SLAVE_IMAGE):$(SLAVE_TAG) make \
 	    -f slave.mk \
 	    PLATFORM=$(PLATFORM) \
@@ -70,4 +72,5 @@ sonic-slave-bash :
 	@docker inspect --type image $(SLAVE_IMAGE):$(SLAVE_TAG) &> /dev/null || \
 	    { echo Image $(SLAVE_IMAGE):$(SLAVE_TAG) not found. Building... ; \
 	    $(DOCKER_BUILD) ; }
+	@$(INSMOD_OVERLAY)
 	@$(DOCKER_RUN) -t $(SLAVE_IMAGE):$(SLAVE_TAG) bash
