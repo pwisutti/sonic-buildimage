@@ -145,7 +145,7 @@ pushd $FILESYSTEM_ROOT/usr/share/initramfs-tools/scripts/init-bottom && sudo pat
 sudo chroot $FILESYSTEM_ROOT update-initramfs -u
 
 ## Install latest intel igb driver
-# sudo cp target/debs/igb.ko $FILESYSTEM_ROOT/lib/modules/${LINUX_KERNEL_VERSION}-amd64/kernel/drivers/net/ethernet/intel/igb/igb.ko
+sudo cp target/debs/igb.ko $FILESYSTEM_ROOT/lib/modules/${LINUX_KERNEL_VERSION}-amd64/kernel/drivers/net/ethernet/intel/igb/igb.ko
 
 ## Install docker
 echo '[INFO] Install docker'
