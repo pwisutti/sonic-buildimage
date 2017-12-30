@@ -78,4 +78,6 @@
 [submodule "platform/broadcom/sonic-platform-modules-quanta"]
 	path = platform/broadcom/sonic-platform-modules-quanta
 	url = https://github.com/QuantaSwitchONIE/sonic-platform-modules-quanta.git
-
+[submodule "platform/mellanox/hw-management"]
+	path = platform/mellanox/hw-management
+	url = https://github.com/Mellanox/hw-mgmt/
