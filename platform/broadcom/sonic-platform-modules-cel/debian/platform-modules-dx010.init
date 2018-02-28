@@ -20,6 +20,7 @@ start)
         modprobe i2c-mux-pca954x
         modprobe dx010_wdt
         modprobe leds-dx010
+        modprobe lm75
 
         found=0
         for devnum in 0 1; do
